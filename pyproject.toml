@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "fastapi-easy-crud"
+version = "0.1.0"
+description = ""
+authors = ["aigloss <aigloss@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.4"
+sqlalchemy = "^2.0.36"
+sqlmodel = "^0.0.22"
+makefun = "^1.15.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
