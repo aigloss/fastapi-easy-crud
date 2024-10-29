@@ -114,7 +114,7 @@ def add_put_route(app: FastAPI, base_path: str, model_type: type[T], repository:
     func_sig = f'update_item({model_type.__name__.lower()}: {request_model.__name__})'
 
     def default_put(*args, **kwargs):
-        return repository.update(kwargs.get(model_type.__name__.lower()))
+        return repository.update(model_type(**kwargs.get(model_type.__name__.lower()).dict()))
 
     doc = f"Update all the attributes of a given {model_type.__name__} item"
     app.add_api_route(f'{base_path}', create_function(func_sig, default_put, doc=doc), methods=["PUT"],
@@ -127,7 +127,7 @@ def add_post_route(app: FastAPI, base_path: str, model_type: type[T], repository
 
     def default_post(*args, **kwargs):
         try:
-            return repository.add(kwargs.get(model_type.__name__.lower()))
+            return repository.add(model_type(**kwargs.get(model_type.__name__.lower()).dict()))
         except IntegrityError as e:
             raise HTTPException(status_code=409, detail=e.orig.args[0])
 
